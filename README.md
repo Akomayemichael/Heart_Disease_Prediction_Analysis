@@ -67,6 +67,20 @@ To improve interpretability and storytelling, numeric medical codes were convert
 
 All transformations follow established clinical guidelines (NCEP ATP III, ACC/AHA, ADA).
 
+## Engineered Features (Created in Power BI)
+
+| Column Name | Data Type | Values | Purpose | DAX Formula |
+|-------------|-----------|--------|---------|-------------|
+| **Gender** | String | Female, Male | Readable gender labels | `IF([Sex]=0,"Female","Male")` |
+| **Chest_Pain_Description** | String | Typical Angina, Atypical Angina, Non-Anginal Pain, Asymptomatic | Clinical descriptions | `SWITCH([Chest_pain_type],1,"Typical Angina",...)` |
+| **Cholesterol_Category** | String | Normal, Borderline High, High | NCEP ATP III risk categories | `SWITCH(TRUE(),[Cholesterol]<200,"Normal",...)` |
+| **Diabetes_Status** | String | Normal, Elevated | Blood sugar interpretation | `IF([FBS_over_120]=0,"Normal","Elevated")` |
+| **Exercise_Angina_Status** | String | No, Yes | Readable angina status | `IF([Exercise_angina]=0,"No","Yes")` |
+| **Heart_Disease_Status** | String | Absence, Presence | Target variable labels | `IF([Heart_Disease]=0,"Absence","Presence")` |
+| **EKG_Description** | String | Normal, ST-T Wave Abnormality, LVH | ECG interpretations | `SWITCH([EKG_results],0,"Normal",...)` |
+| **ST_Slope_Description** | String | Upsloping, Flat, Downsloping | Slope interpretations | `SWITCH([Slope_of_ST],1,"Upsloping",...)` |
+| **Thallium_Description** | String | Normal, Fixed Defect, Reversible Defect | Nuclear test interpretations | `SWITCH([Thallium],3,"Normal",...)` |
+
 ---
 
 ## 📊 Power BI Dashboard — Page-by-Page Insights
