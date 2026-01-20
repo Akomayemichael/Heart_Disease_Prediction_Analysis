@@ -69,16 +69,35 @@ All transformations follow established clinical guidelines (NCEP ATP III, ACC/AH
 
 ## Engineered Features (Created in Power BI)
 
-| Column Name | Data Type | Values | Purpose | DAX Formula |
-|-------------|-----------|--------|---------|-------------|
-| **Gender** | String | Female, Male | Readable gender labels | `Gender = 
+| Column Name | Data Type | Values | Purpose |
+|-------------|-----------|--------|---------|
+| **Gender** | String | Female, Male | Readable gender labels |
+| **Chest_Pain_Description** | String | Typical Angina, Atypical Angina, Non-Anginal Pain, Asymptomatic | Clinical descriptions |
+| **Cholesterol_Category** | String | Normal, Borderline High, High | NCEP ATP III risk categories |
+| **Diabetes_Status** | String | Normal, Elevated | Blood sugar interpretation |
+| **Exercise_Angina_Status** | String | No, Yes | Readable angina status |
+| **Heart_Disease_Status** | String | Absence, Presence | Target variable labels |
+| **EKG_Description** | String | Normal, ST-T Wave Abnormality, LVH | ECG interpretations |
+| **ST_Slope_Description** | String | Upsloping, Flat, Downsloping | Slope interpretations |
+| **Thallium_Description** | String | Normal, Fixed Defect, Reversible Defect | Nuclear test interpretations |
+
+<details>
+<summary><b>View DAX Formulas</b></summary>
+
+### Gender
+```dax
+Gender = 
 SWITCH(
     heart_disease_data[Sex],
     0, "Female",
     1, "Male",
     "Unknown"
-)` |
-| **Chest_Pain_Description** | String | Typical Angina, Atypical Angina, Non-Anginal Pain, Asymptomatic | Clinical descriptions | `Chest_Pain_Description = 
+)
+```
+
+### Chest Pain Description
+```dax
+Chest_Pain_Description = 
 SWITCH(
     heart_disease_data[Chest_pain_type],
     1, "Typical Angina",
@@ -86,56 +105,87 @@ SWITCH(
     3, "Non-Anginal Pain",
     4, "Asymptomatic",
     "Unknown"
-)` |
-| **Cholesterol_Category** | String | Normal, Borderline High, High | NCEP ATP III risk categories | `Cholesterol Category = 
+)
+```
+
+### Cholesterol Category
+```dax
+Cholesterol_Category = 
 SWITCH(
     TRUE(),
-    'heart_disease_data'[Cholesterol] < 200, "Normal",
-    'heart_disease_data'[Cholesterol] <= 239, "Borderline High",
+    heart_disease_data[Cholesterol] < 200, "Normal",
+    heart_disease_data[Cholesterol] <= 239, "Borderline High",
     "High"
-)` |
-| **Diabetes_Status** | String | Normal, Elevated | Blood sugar interpretation | `Diabetes_Status = 
+)
+```
+
+### Diabetes Status
+```dax
+Diabetes_Status = 
 SWITCH(
     TRUE(),
     heart_disease_data[FBS_over_120] = 0, "Normal/Low Risk",
     heart_disease_data[FBS_over_120] = 1, "Elevated Risk (Prediabetes/Diabetes)"
-)` |
-| **Exercise_Angina_Status** | String | No, Yes | Readable angina status | `Exercise_Angina_Status = 
+)
+```
+
+### Exercise Angina Status
+```dax
+Exercise_Angina_Status = 
 IF(
     heart_disease_data[Exercise_angina] = 0,
     "No",
     "Yes"
-)` |
-| **Heart_Disease_Status** | String | Absence, Presence | Target variable labels | `Heart_Disease_Status = 
+)
+```
+
+### Heart Disease Status
+```dax
+Heart_Disease_Status = 
 IF(
     heart_disease_data[Heart_Disease] = 0,
     "Absence",
     "Presence"
-)` |
-| **EKG_Description** | String | Normal, ST-T Wave Abnormality, LVH | ECG interpretations | `EKG_Description = 
+)
+```
+
+### EKG Description
+```dax
+EKG_Description = 
 SWITCH(
     heart_disease_data[EKG_results],
     0, "Normal",
     1, "ST-T Wave Abnormality",
     2, "Left Ventricular Hypertrophy",
     "Unknown"
-)` |
-| **ST_Slope_Description** | String | Upsloping, Flat, Downsloping | Slope interpretations | `ST_Slope_Description = 
+)
+```
+
+### ST Slope Description
+```dax
+ST_Slope_Description = 
 SWITCH(
     heart_disease_data[Slope_of_ST],
     1, "Upsloping",
     2, "Flat",
     3, "Downsloping",
     "Unknown"
-)` |
-| **Thallium_Description** | String | Normal, Fixed Defect, Reversible Defect | Nuclear test interpretations | `Thallium_Description = 
+)
+```
+
+### Thallium Description
+```dax
+Thallium_Description = 
 SWITCH(
     heart_disease_data[Thallium],
     3, "Normal",
     6, "Fixed Defect",
     7, "Reversible Defect",
     "Unknown"
-)` |
+)
+```
+
+</details>|
 
 ---
 
