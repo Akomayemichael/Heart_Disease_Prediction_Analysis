@@ -71,15 +71,71 @@ All transformations follow established clinical guidelines (NCEP ATP III, ACC/AH
 
 | Column Name | Data Type | Values | Purpose | DAX Formula |
 |-------------|-----------|--------|---------|-------------|
-| **Gender** | String | Female, Male | Readable gender labels | `IF([Sex]=0,"Female","Male")` |
-| **Chest_Pain_Description** | String | Typical Angina, Atypical Angina, Non-Anginal Pain, Asymptomatic | Clinical descriptions | `SWITCH([Chest_pain_type],1,"Typical Angina",...)` |
-| **Cholesterol_Category** | String | Normal, Borderline High, High | NCEP ATP III risk categories | `SWITCH(TRUE(),[Cholesterol]<200,"Normal",...)` |
-| **Diabetes_Status** | String | Normal, Elevated | Blood sugar interpretation | `IF([FBS_over_120]=0,"Normal","Elevated")` |
-| **Exercise_Angina_Status** | String | No, Yes | Readable angina status | `IF([Exercise_angina]=0,"No","Yes")` |
-| **Heart_Disease_Status** | String | Absence, Presence | Target variable labels | `IF([Heart_Disease]=0,"Absence","Presence")` |
-| **EKG_Description** | String | Normal, ST-T Wave Abnormality, LVH | ECG interpretations | `SWITCH([EKG_results],0,"Normal",...)` |
-| **ST_Slope_Description** | String | Upsloping, Flat, Downsloping | Slope interpretations | `SWITCH([Slope_of_ST],1,"Upsloping",...)` |
-| **Thallium_Description** | String | Normal, Fixed Defect, Reversible Defect | Nuclear test interpretations | `SWITCH([Thallium],3,"Normal",...)` |
+| **Gender** | String | Female, Male | Readable gender labels | `Gender = 
+SWITCH(
+    heart_disease_data[Sex],
+    0, "Female",
+    1, "Male",
+    "Unknown"
+)` |
+| **Chest_Pain_Description** | String | Typical Angina, Atypical Angina, Non-Anginal Pain, Asymptomatic | Clinical descriptions | `Chest_Pain_Description = 
+SWITCH(
+    heart_disease_data[Chest_pain_type],
+    1, "Typical Angina",
+    2, "Atypical Angina",
+    3, "Non-Anginal Pain",
+    4, "Asymptomatic",
+    "Unknown"
+)` |
+| **Cholesterol_Category** | String | Normal, Borderline High, High | NCEP ATP III risk categories | `Cholesterol Category = 
+SWITCH(
+    TRUE(),
+    'heart_disease_data'[Cholesterol] < 200, "Normal",
+    'heart_disease_data'[Cholesterol] <= 239, "Borderline High",
+    "High"
+)` |
+| **Diabetes_Status** | String | Normal, Elevated | Blood sugar interpretation | `Diabetes_Status = 
+SWITCH(
+    TRUE(),
+    heart_disease_data[FBS_over_120] = 0, "Normal/Low Risk",
+    heart_disease_data[FBS_over_120] = 1, "Elevated Risk (Prediabetes/Diabetes)"
+)` |
+| **Exercise_Angina_Status** | String | No, Yes | Readable angina status | `Exercise_Angina_Status = 
+IF(
+    heart_disease_data[Exercise_angina] = 0,
+    "No",
+    "Yes"
+)` |
+| **Heart_Disease_Status** | String | Absence, Presence | Target variable labels | `Heart_Disease_Status = 
+IF(
+    heart_disease_data[Heart_Disease] = 0,
+    "Absence",
+    "Presence"
+)` |
+| **EKG_Description** | String | Normal, ST-T Wave Abnormality, LVH | ECG interpretations | `EKG_Description = 
+SWITCH(
+    heart_disease_data[EKG_results],
+    0, "Normal",
+    1, "ST-T Wave Abnormality",
+    2, "Left Ventricular Hypertrophy",
+    "Unknown"
+)` |
+| **ST_Slope_Description** | String | Upsloping, Flat, Downsloping | Slope interpretations | `ST_Slope_Description = 
+SWITCH(
+    heart_disease_data[Slope_of_ST],
+    1, "Upsloping",
+    2, "Flat",
+    3, "Downsloping",
+    "Unknown"
+)` |
+| **Thallium_Description** | String | Normal, Fixed Defect, Reversible Defect | Nuclear test interpretations | `Thallium_Description = 
+SWITCH(
+    heart_disease_data[Thallium],
+    3, "Normal",
+    6, "Fixed Defect",
+    7, "Reversible Defect",
+    "Unknown"
+)` |
 
 ---
 
