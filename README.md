@@ -217,7 +217,7 @@ SWITCH(
 **Purpose:**  
 Provide an instant snapshot of the heart disease burden.
 
-![Page 1 - Executive Overview](images/page1-executive-overview.png)
+![Page 1 - Executive Overview](images/Overview.png)
 
 **Key Insights:**
 - A significant proportion of patients are affected by heart disease
@@ -232,7 +232,7 @@ Provide an instant snapshot of the heart disease burden.
 **Purpose:**  
 Understand how age and gender influence disease occurrence.
 
-![Page 2 - Demographic Risk Analysis](images/page2-demographic-risk.png)
+![Page 2 - Demographic Risk Analysis](images/Demographics.png)
 
 **Key Insights:**
 - Heart disease risk rises markedly after age 50
@@ -246,7 +246,7 @@ Understand how age and gender influence disease occurrence.
 **Purpose:**  
 Evaluate symptoms and diagnostic indicators linked to disease.
 
-![Page 3 - Clinical Risk Indicators](images/page3-clinical-risk.png)
+![Page 3 - Clinical Risk Indicators](images/Clinical_indicators.png)
 
 **Key Insights:**
 - Exercise-induced angina strongly correlates with heart disease
@@ -260,7 +260,7 @@ Evaluate symptoms and diagnostic indicators linked to disease.
 **Purpose:**  
 Assess lifestyle-related and biomarker-driven risk factors.
 
-![Page 4 - Lifestyle & Biomarker Risk](images/page4-biomarker-risk.png)
+![Page 4 - Lifestyle & Biomarker Risk](images/Lifestyle_Biomarkers.png)
 
 **Key Insights:**
 - Elevated cholesterol significantly increases disease likelihood
@@ -275,7 +275,7 @@ Assess lifestyle-related and biomarker-driven risk factors.
 **Purpose:**  
 Identify patients requiring closer clinical attention.
 
-![Page 5 - High-Risk Patient Profile](images/page5-high-risk-profile.png)
+![Page 5 - High-Risk Patient Profile](images/High_Risk.png)
 
 **Key Insights:**
 - High-risk classification includes patients with multiple cardiovascular risk factors
@@ -292,7 +292,7 @@ High-risk status is determined by a combination of elevated biomarkers and clini
 **Purpose:**  
 Analyze advanced diagnostic and imaging results.
 
-![Page 6 - Diagnostic Test Insights](images/page6-diagnostic-tests.png)
+![Page 6 - Diagnostic Test Insights](images/Diagnostic_tests.png)
 
 **Key Insights:**
 - Disease prevalence increases with the number of blocked vessels
@@ -300,12 +300,6 @@ Analyze advanced diagnostic and imaging results.
 - ST depression shows a clear dose–response relationship with risk
 
 ---
-```
-
-## 📋 Checklist to Complete This:
-
-1. **Create the `images` folder** in your repository:
-```
 
 ## 🚨 High-Risk Logic Summary
 
